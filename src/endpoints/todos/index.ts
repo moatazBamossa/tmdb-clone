@@ -21,6 +21,16 @@ export const getTodo = async (id: number) => {
   return res.data;
 };
 
+export const getPosts = async () => {
+  const result = await axios({
+    url: "https://jsonplaceholder.typicode.com/photos",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return result.data;
+};
+
 type x<T> = Omit<
   UseQueryOptions<unknown, unknown, T, QueryKey>,
   "initialData"
@@ -40,4 +50,23 @@ export const useGetTodo = (id: number, opts?: x<{ id: number }>) => {
     ...opts,
   });
   return q;
+};
+
+export const useGetPosts = (
+  opts?: x<
+    {
+      albumId: number;
+      id: number;
+      title: string;
+      url: string;
+      thumbnailUrl: string;
+    }[]
+  >
+) => {
+  const reactQuer = useQuery({
+    QueryKey: ["posts"],
+    queryFn: getPosts,
+    ...opts,
+  });
+  return reactQuer;
 };
