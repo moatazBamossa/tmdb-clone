@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import App from "./App.tsx";
 import "./index.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -14,7 +14,7 @@ import {
 // Create a client
 const queryClient = new QueryClient();
 
-const Root = (): JSX.Element => {
+const Root = ()=> {
   return (
     <React.StrictMode>
       <QueryClientProvider client={queryClient}>
@@ -25,4 +25,4 @@ const Root = (): JSX.Element => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("root")!).render(<Root />);
+ReactDOM.render(<Root />, document.getElementById("root"));
