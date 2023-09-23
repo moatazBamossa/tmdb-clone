@@ -1,24 +1,28 @@
-import "./style.css";
-
 type CardsProps = {
-  type: string;
+  image: string;
   title: string;
-  name: string;
-  img: string;
+  description: string;
+  usedBy: string;
 };
 
-export const Card = (props: CardsProps) => {
-  const { type, title, name, img } = props;
+const Card = ({ image, title, description, usedBy }: CardsProps) => {
   return (
-    <div className="card">
-      <img src={img} alt="Avatar" />
-      <div className="container">
-        <h2>{title}</h2>
-        <h4>
-          <b>{name}</b>
-        </h4>
-        <p>{type}</p>
+    <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="flex items-center mb-4">
+        <img src={image} alt={title} className="w-12 h-12 rounded-full mr-4" />
+        <div>
+          <h3 className="text-xl font-semibold mb-1">{title}</h3>
+          <p className="text-gray-700">{description}</p>
+        </div>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-gray-500">Used By:</span>
+        <div className="flex items-center">
+          <p>{usedBy}</p>
+        </div>
       </div>
     </div>
   );
 };
+
+export default Card;

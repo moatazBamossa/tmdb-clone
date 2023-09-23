@@ -41,6 +41,6 @@
   color: #888;
 } */
 .Cards {
-  display: grid;
-  grid-template-columns: auto auto auto auto;
+  margin: 22px;
+  padding: 10px;
 }

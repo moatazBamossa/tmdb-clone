@@ -1,7 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App.tsx";
-import "./index.css";
+import { StrictMode } from "react";
+import { render } from "react-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
   useQuery,
@@ -10,19 +8,21 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import App from "./App";
+import "./index.css";
 
 // Create a client
 const queryClient = new QueryClient();
 
-const Root = ()=> {
+const Root = () => {
   return (
-    <React.StrictMode>
+    <StrictMode>
       <QueryClientProvider client={queryClient}>
         <App />
         <ReactQueryDevtools position="bottom-left" />
       </QueryClientProvider>
-    </React.StrictMode>
+    </StrictMode>
   );
 };
 
-ReactDOM.render(<Root />, document.getElementById("root"));
+render(<Root />, document.getElementById("root"));

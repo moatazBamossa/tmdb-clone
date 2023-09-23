@@ -1,0 +1,10 @@
+.navItem {
+  padding: 6px;
+  color: white;
+}
+.navItem:hover {
+  background: white;
+  color: blueviolet;
+  border-radius: 12px;
+  transition: 800ms;
+}
