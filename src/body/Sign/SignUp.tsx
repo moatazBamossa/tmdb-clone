@@ -10,16 +10,22 @@ import {
   Link,
 } from "@nextui-org/react";
 import { Icon } from "./Icon";
+import { addUser } from "@/index";
+import { useState } from "react";
 
 const SignUp = (props: { isOpen: boolean; onClose: () => void }) => {
   const { isOpen, onClose } = props;
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
   return (
     <Modal isOpen={isOpen} onClose={onClose} placement="top-center">
       <ModalContent>
         {(onClose) => (
           <>
             <ModalHeader className="flex flex-col gap-1">Log in</ModalHeader>
-            <ModalBody>
+            <ModalBody className="LogIn">
               <Input
                 autoFocus
                 endContent={
@@ -30,9 +36,14 @@ const SignUp = (props: { isOpen: boolean; onClose: () => void }) => {
                     />
                   </Icon>
                 }
-                label="Email"
-                placeholder="Enter your email"
+                label="User Name"
+                placeholder="Enter your User Name"
                 variant="bordered"
+                name="userName"
+                onChange={(w) =>
+                  setUser({ username: w.target.value, password: user.password })
+                }
+                value={user.username}
               />
               <Input
                 endContent={
@@ -51,6 +62,11 @@ const SignUp = (props: { isOpen: boolean; onClose: () => void }) => {
                 placeholder="Enter your password"
                 type="password"
                 variant="bordered"
+                name="password"
+                onChange={(w) =>
+                  setUser({ username: user.username, password: w.target.value })
+                }
+                value={user.password}
               />
               <div className="flex py-2 px-1 justify-between">
                 <Checkbox
@@ -69,7 +85,13 @@ const SignUp = (props: { isOpen: boolean; onClose: () => void }) => {
               <Button color="danger" variant="flat" onPress={onClose}>
                 Close
               </Button>
-              <Button color="primary" onPress={onClose}>
+              <Button
+                color="primary"
+                onPress={() => {
+                  addUser(user.username, user.password);
+                  onClose();
+                }}
+              >
                 Sign in
               </Button>
             </ModalFooter>

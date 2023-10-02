@@ -5,12 +5,21 @@ import NavbarPage from "./Header/NavBar/NavBar";
 import CardPage from "./components/ui/Card2/Card";
 import "./App.css";
 import { useState } from "react";
+import { getDocs } from "firebase/firestore";
+import { colRef } from ".";
 function App() {
   const getMovies = useGetMovies();
   console.log("getMovies", getMovies?.data?.results);
   const [dataSearch, setDataSearch] = useState("");
   const data = getMovies?.data?.results;
 
+  getDocs(colRef).then((snapShot) => {
+    const books = [];
+    snapShot.docs.forEach((doc) => {
+      books.push({ ...doc.data(), id: doc.id });
+    });
+    console.log("books", books);
+  });
   const handelData = (value: string) => {
     setDataSearch(value);
   };

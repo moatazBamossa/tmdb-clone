@@ -27,7 +27,7 @@ const NavbarPage = (props: NavbarPageProps) => {
 
   const menuItems = ["Profile", "Deployments", "Help & Feedback", "Log Out"];
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  console.log("first", localStorage.getItem("User"));
   return (
     <>
       <SignUp isOpen={isOpen} onClose={onClose} />
@@ -60,15 +60,19 @@ const NavbarPage = (props: NavbarPageProps) => {
             <Link href="#">Login</Link>
           </NavbarItem>
           <NavbarItem>
-            <Button
-              as={Link}
-              color="primary"
-              href="#"
-              variant="flat"
-              onPress={onOpen}
-            >
-              Sign Up
-            </Button>
+            {localStorage.getItem("User") ? (
+              <>{localStorage.getItem("User")}</>
+            ) : (
+              <Button
+                as={Link}
+                color="primary"
+                href="#"
+                variant="flat"
+                onPress={onOpen}
+              >
+                Sign Up
+              </Button>
+            )}
           </NavbarItem>
 
           <Input
